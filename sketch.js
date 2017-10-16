@@ -35,11 +35,14 @@ function initializeZombie() {
   zombieX = random(0, windowWidth);
   zombieY = random(0, 200);
   zombieSize = random(MIN_SIZE, MAX_SIZE);
-  zombieColor = color(random(50, 255), random(50, 255), random(50, 255), 150);
+  zombieColor = color(random(128, 255), random(128, 255), random(128, 255), 150);
 }
 
 function initializeHuman() {
-  // raaaawwwwwrrr!
+  humanX = random(0, windowWidth);
+  humanY = random(300, 500);
+  humanSize = random(MIN_SIZE, MAX_SIZE);
+  humanColor = color(random(127), random(127), random(127), 150);
 }
 
 function drawZombie() {
@@ -48,5 +51,6 @@ function drawZombie() {
 }
 
 function drawHuman() {
-  // mmmm braaaiiiiinss!
+  fill(humanColor);
+  ellipse(humanX, humanY, humanSize, humanSize);
 }
