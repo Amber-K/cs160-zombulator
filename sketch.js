@@ -1,6 +1,5 @@
-// http://tinyurl.com/cs160ex15
 // Zombulator by Amber Kolar
-// CS 160 Exercise 15: Objects
+// CS 160 Exercise 16: Biased Random Walk
 
 var backgroundColor;
 
@@ -24,6 +23,7 @@ function draw() {
   noStroke();
   drawZombies();
   drawHumans();
+  moveHumans();
 }
 
 
@@ -40,6 +40,7 @@ function initializeZombie(index) {
   zombies[index] = {
     x: random(0, windowWidth),
     y: random(0, 200),
+    speed: random(0.25, 3),
     size: random(MIN_SIZE, MAX_SIZE),
     color: color(random(100, 255), random(50, 150), random(50, 150), 150)
   };
@@ -47,19 +48,18 @@ function initializeZombie(index) {
 
 function drawZombies() {
   for (var i = 0; i < NUMBER_OF_ZOMBIES; ++i) {
-    drawZombie(i);
+    drawZombie(zombies[i]);
   }
 }
 
-function drawZombie(index) {
-  var zombie = zombies[index];
+function drawZombie(zombie) {
   fill(zombie.color);
   ellipse(zombie.x, zombie.y, zombie.size, zombie.size);
 }
 
 
 // Humans. Mmmm brains!
- 
+
 function initializeHumans() {
   humans = [];
   for (var i = 0; i < NUMBER_OF_HUMANS; ++i) {
@@ -78,12 +78,21 @@ function initializeHuman(index) {
 
 function drawHumans() {
   for (var i = 0; i < NUMBER_OF_HUMANS; ++i) {
-    drawHuman(i);
+    drawHuman(humans[i]);
   }
 }
 
-function drawHuman(index) {
-  var human = humans[index];
+function drawHuman(human) {
   fill(human.color);
   ellipse(human.x, human.y, human.size, human.size);
+}
+
+function moveHumans() {
+  for (var i = 0; i < NUMBER_OF_HUMANS; ++i) {
+    moveHuman(humans[i]);
+  }
+}
+
+function moveHuman(human) {
+  human.y -= 1;
 }
