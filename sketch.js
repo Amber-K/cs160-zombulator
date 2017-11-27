@@ -1,5 +1,4 @@
 // Zombulator by Amber Kolar
-// CS 160 Exercise 20: Collisions (end of exercise)
 
 var backgroundColor;
 
@@ -32,9 +31,13 @@ function handleCollisions() {
     var attacker = population[i];
     for (var j = i + 1; j < POPULATION_SIZE; ++j) {
       var target = population[j];
-      if (attacker.isTouching(target)) {
-
-        print("Fight! Fight! Fight!");
+      if (attacker.isTouching(target) && attacker.size >= target.size && target.size > 0) {
+        target.size = 0;
+        if (target.humanoidType == "zombie") {
+          --zombieCount;
+        } else {
+          --humanCount;
+        }
       }
     }
   }
