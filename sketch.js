@@ -32,11 +32,26 @@ function handleCollisions() {
     for (var j = i + 1; j < POPULATION_SIZE; ++j) {
       var target = population[j];
       if (attacker.isTouching(target) && attacker.size >= target.size && target.size > 0) {
-        target.size = 0;
         if (target.humanoidType == "zombie") {
           --zombieCount;
+          target.size = 0;
         } else {
           --humanCount;
+          ++zombieCount;
+          target.humanoidType = "zombie";
+          target.color = color(random(100, 255), random(50, 150), random(50, 150), 150);
+          target.move = function() {
+            var direction = random(0, 100);
+            if (direction < 20) {
+              this.x += this.speed;
+            } else if (direction < 40) {
+              this.x -= this.speed;
+            } else if (direction < 60) {
+              this.y -= this.speed;
+            } else {
+              this.y += this.speed;
+            }
+          }
         }
       }
     }
